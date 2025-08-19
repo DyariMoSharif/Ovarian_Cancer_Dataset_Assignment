@@ -55,18 +55,5 @@ This repository documents the **dataset specification** and the **clinical ratio
 | `tumor_size_cm` | cm | Zero‑inflated: mass=0 (no lesion) w/ high prob; else benign simple cyst ~1–5 (Trunc. Normal μ≈3, σ≈1) | Log‑normal (right‑skew), support 0.5–20; center ~8–11 | Positive (modest) correlation with CA‑125 in cases. |
 | `diagnosis_label` | 0/1 | By definition 0 | By definition 1 | Labels assigned by construction. |
 
----
 
-## Modeling Notes
-
-- **CA‑125 & Menopause:** Use different reference behavior for pre‑ vs post‑menopause. Many early‑stage cancers remain ≤35 U/mL; do not let CA‑125 alone determine the label.  
-- **BMI Hemodilution (Controls):** Reduce CA‑125 ≈2–3% per BMI unit (cap at ~20% total).  
-- **Interaction Gates:** Set BMI→risk ≈ 0 if `mht_use=1` **or** `family_history=1`.  
-- **BRCA Enrichment:** Increase BRCA prevalence and shift age left among BRCA+ cases (≈6–10 years younger).  
-- **Ultrasound Risk:** Drive primarily from `tumor_size_cm`; keep only moderate correlation with CA‑125 (ρ≈0.3–0.5).  
-- **Benign Cysts in Controls:** Permit simple cysts (≈1–5 cm) without high risk; map probabilities to O‑RADS 2–3.
-
----
-
-Choose a license appropriate to your intended use (e.g., MIT for code, CC‑BY‑4.0 for documentation/spec).
 
